@@ -210,10 +210,43 @@ console.log(etiquetaEmisiones([{id: 1, modelo: 'híbrido', matricula: '4565HLM'}
                     {nombre: ‘Lego’, categoria:’construcción’ }]
 */ 
 
-let listaReyes = () => {
-
+let listaReyes = (listaRegalos, orden) => {
+    return listaRegalos.sort((a, b) => (a[orden] < b[orden]) ? -1 : 1);
 }
 
 console.log(listaReyes([{nombre: 'Barbie', categoria: 'muñecas' },
     {nombre: 'Lego', categoria:'construcción' },
-    {nombre: 'Fifa2023', categoria:'videojuego' }]));
+    {nombre: 'Fifa2023', categoria:'videojuego' }], "categoria"));
+
+
+/* 
+        Crea una función que reciba un listado de jugadores con el número de 
+        billetes de cada cantidad que tienen y devuelva el jugador con más dinero. 
+
+        No habrá más de un jugador que tenga el mayor número de billetes
+
+        Ejemplo:
+       Entrada:
+            [{nombre: ‘Pedro’, billetesDe5: 10, billetesDe10: 3, billetestDe50: 1 },
+            {nombre: ‘Luis’, billetesDe5: 10, billetesDe10: 1, billetestDe50: 2 },
+                {nombre: ‘Gon’, , billetesDe5: 5, billetesDe10: 5, billetestDe50: 5 },];
+
+            Salida:
+                Gon
+*/
+
+let calcRico = (array) => {
+    let dinero = 0;
+    let posicion = 0;
+    for (let i = 0; i < array.length; i++) {
+        if (dinero < (array[i].billetesDe5 * 5) + (array[i].billetesDe10 * 10) + (array[i].billetesDe50 * 50)){
+            dinero = (array[i].billetesDe5 * 5) + (array[i].billetesDe10 * 10) + (array[i].billetesDe50 * 50);
+            posicion = i;
+        }
+    }
+    return array[posicion].nombre;
+}
+
+console.log(calcRico([{nombre: 'Pedro', billetesDe5: 10, billetesDe10: 3, billetesDe50: 1 },
+    {nombre: 'Luis', billetesDe5: 10, billetesDe10: 1, billetesDe50: 2 },
+        {nombre: 'Gon', billetesDe5: 5, billetesDe10: 5, billetesDe50: 5 }]));
